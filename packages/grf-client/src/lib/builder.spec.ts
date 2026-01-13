@@ -5,8 +5,10 @@ import {
   buildNumericFilter,
   buildRangeFilter,
   buildSetFilter,
+  buildEqualityFilter,
 } from './builder.js';
 import {
+  EqualityOperator,
   NumericOperator,
   RangeOperator,
   SetOperator,
@@ -158,6 +160,39 @@ describe('builder', () => {
           group: undefined,
         },
       ]);
+    });
+  });
+
+  describe(buildEqualityFilter.name, () => {
+    it('should build an equality filter without group', () => {
+      const filter = buildEqualityFilter(
+        'status',
+        EqualityOperator.Equal,
+        'active'
+      );
+      expect(filter).toEqual({
+        field: 'status',
+        operator: EqualityOperator.Equal,
+        value: 'active',
+        kind: 'equality',
+        group: undefined,
+      });
+    });
+
+    it('should build an equality filter with group', () => {
+      const filter = buildEqualityFilter(
+        'status',
+        EqualityOperator.NotEqual,
+        'inactive',
+        'group1'
+      );
+      expect(filter).toEqual({
+        field: 'status',
+        operator: EqualityOperator.NotEqual,
+        value: 'inactive',
+        group: 'group1',
+        kind: 'equality',
+      });
     });
   });
 });

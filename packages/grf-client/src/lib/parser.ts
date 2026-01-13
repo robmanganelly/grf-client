@@ -1,14 +1,6 @@
-import { FieldType } from './builder.js';
+import { FieldType, getFieldValue } from './builder.js';
 
-function getFieldValue(field: FieldType) {
-  if (field.kind === 'range') {
-    return field.range;
-  } else if (field.kind === 'set') {
-    return field.values;
-  } else {
-    return field.value;
-  }
-}
+
 
 
 /**

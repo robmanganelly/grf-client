@@ -41,3 +41,6 @@ export const TextOperator = {
   InsensitiveNotIncludes: 'niinc',
 } as const;
 export type TTextOperator = (typeof TextOperator)[keyof typeof TextOperator];
+
+
+export type TOperator = TTextOperator | TEqualityOperator | TNumericOperator | TRangeOperator | TSetOperator;
